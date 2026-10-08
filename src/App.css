@@ -1,0 +1,91 @@
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 16px 16px 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--surface);
+}
+
+.album-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.album-item {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.album-select {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  display: grid;
+  gap: 2px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.field {
+  display: block;
+  margin: 10px 0 4px;
+}
+
+.status {
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: var(--text-2);
+}
+
+.now-playing {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.tracklist {
+  margin-top: 14px;
+}
+
+.tracklist ul {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+button,
+.nav-link {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: var(--surface-3);
+  color: var(--text);
+  text-decoration: none;
+}
+
+button.primary {
+  background: var(--accent);
+  color: #111;
+  border: none;
+}
+
+.nav-link--active {
+  outline: 2px solid var(--accent);
+}

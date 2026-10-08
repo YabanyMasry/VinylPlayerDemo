@@ -1,0 +1,381 @@
+.playlists-page {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  padding: 0 !important;
+  background: var(--bg);
+  z-index: 5;
+  border: none !important;
+  border-radius: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.playlists-container {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: 100%;
+  border-top: 1px solid var(--border);
+}
+
+/* --- Playlist Rack Style --- */
+.playlist-rack {
+  background: --surface ;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.playlist-rack::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+.rack-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 12px;
+}
+
+.rack-header h3 {
+  font-family: 'Doto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.rack-led-strip {
+  display: flex;
+  gap: 8px;
+}
+
+.led {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #333;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.5);
+  border: 1px solid #000;
+}
+
+.led.green { background: #103020; }
+.led.yellow { background: #3f3500; }
+.led.red { background: #3d0000; }
+
+.led.green.on { background: #4ade80; box-shadow: 0 0 8px #4ade80; }
+.led.yellow.on { background: #facc15; box-shadow: 0 0 8px #facc15; }
+.led.red.on { background: #f87171; box-shadow: 0 0 8px #f87171; }
+
+.rack-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rack-slot {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #0a0a0a;
+  border-radius: 3px;
+  padding: 12px 14px;
+  background: #1e1e1e; /* Simplified from a gradient to a solid dark gray */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    3px 3px 5px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.06),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+
+.rack-slot:hover {
+  color: #eaeaea; /* Simplified hover color */
+  box-shadow:
+    3px 3px 5px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.08),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.1),
+    0 0 8px rgba(255, 255, 255, 0.06);
+}
+
+.rack-slot:active {
+  background: #141414; /* Solid, darker gray for the press state */
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.9); /* Cleaned up redundant 0px shadows */
+  transform: translateY(1px);
+}
+
+.rack-slot.active {
+  background: #262626; /* Solid, lighter gray for the active/selected state */
+  border-left: 3px solid #fff; /* Simplified to pure white */
+  box-shadow:
+    3px 3px 5px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.1),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.14),
+    0 0 12px rgba(255, 255, 255, 0.12);
+}
+
+.slot-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: #333;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8);
+  border: 1px solid #111;
+}
+
+.rack-slot.active .slot-indicator {
+  background: #fff; /* Simplified to pure white */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.slot-label {
+  font-family: 'Doto', sans-serif;
+  font-weight: 700;
+  font-size: 1rem; /* Increased from 0.85rem */
+  letter-spacing: 0.5px;
+  color: #b8b8b8;
+  text-transform: uppercase;
+}
+
+.rack-slot.active .slot-label {
+  color: #fff;
+}
+
+/* --- Playlist Details Style --- */
+.playlist-details {
+  background: var(--bg);
+  padding: 82px 32px 32px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.playlist-details::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+}
+
+.details-header h2 {
+  font-family: 'Doto', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #fff;
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* 1. The Retro Hardware "Load" Button */
+.play-btn {
+  /* Text Formatting */
+  font-family: 'Doto', 'Courier New', monospace;
+  font-weight: 800;
+  padding: 10px 24px; /* Gives the text room to breathe */
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  
+  /* Retro Hardware Rectangular Shell */
+  border-radius: 3px;
+  background: linear-gradient(145deg, #222222, #0d0d0d);
+  border: 1px solid #050505;
+
+  /* Physical elevation shadows */
+  box-shadow:
+    3px 3px 5px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.06),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+
+  color: #777777;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.play-btn:hover:not(:disabled) {
+  color: #bbbbbb;
+}
+
+/* Clicking physically sinks the rectangle into the panel */
+.play-btn:active:not(:disabled) {
+  background: #111111;
+  box-shadow:
+    0px 0px 0px rgba(0, 0, 0, 0),
+    0px 0px 0px rgba(255, 255, 255, 0),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.9);
+  color: #444444;
+  transform: translateY(1px);
+}
+
+.play-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  color: #555;
+}
+
+/* Raised rectangular hardware delete button with red LED tone */
+.delete-btn {
+  font-family: 'Doto', 'Courier New', monospace;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 3px;
+  background: linear-gradient(145deg, #222222, #0d0d0d);
+  border: 1px solid #050505;
+  box-shadow:
+    3px 3px 5px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.06),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+  color: #ff979756;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.delete-btn:hover {
+  color: #ff6e6e;
+
+}
+
+.delete-btn:active {
+  background: #111111;
+  box-shadow:
+    0px 0px 0px rgba(0, 0, 0, 0),
+    0px 0px 0px rgba(255, 255, 255, 0),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.9);
+  color: #ef4444;
+  transform: translateY(1px);
+}
+
+.track-list-container {
+  flex: 1;
+}
+
+.playlist-tracks {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.playlist-tracks th {
+  font-family: 'Doto', sans-serif;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  padding: 12px;
+  color: #555;
+  border-bottom: 2px solid #222;
+}
+
+.track-row {
+  border-bottom: 1px solid #222;
+  transition: background 0.1s;
+}
+
+.track-row:hover {
+  background: rgba(158, 203, 255, 0.03);
+}
+
+/* 2. Hardware Track List Fonts */
+.playlist-tracks td {
+  padding: 12px;
+  font-size: 0.85rem;
+  font-family: 'Courier New', Courier, monospace; /* Digital readout look */
+  color: #aaa;
+}
+
+.track-title { 
+  font-family: 'Doto', 'Courier New', monospace; 
+  font-weight: 600; 
+  color: #e0e0e0; 
+  letter-spacing: 0.5px;
+}
+
+.album-col, .track-artist { 
+  font-size: 0.75rem; 
+  text-transform: uppercase; 
+  letter-spacing: 0.05em;
+}
+
+.num-col { 
+  width: 40px; 
+  text-align: center; 
+  color: #555; 
+  font-weight: bold;
+}
+
+/* --- Empty / Placeholder --- */
+.placeholder-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rack-logo {
+  text-align: center;
+  opacity: 0.2;
+}
+
+.logo-icon {
+  font-size: 4rem;
+  line-height: 1;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.rack-logo h3 {
+  font-family: 'Doto', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+}
+
+/* --- Status Helpers --- */
+.loading-overlay {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: #3b82f6;
+  color: #fff;
+  font-family: 'Doto', sans-serif;
+  font-weight: 900;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.error-banner {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  right: 20px;
+  background: #ef4444;
+  color: #fff;
+  padding: 12px;
+  font-family: 'Doto', sans-serif;
+  font-weight: 700;
+}

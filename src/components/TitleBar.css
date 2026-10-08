@@ -1,0 +1,57 @@
+.electron-titlebar {
+  display: flex;
+  height: 32px;
+  background-color: #121212;
+  color: #fff;
+  align-items: center;
+  justify-content: space-between;
+  -webkit-app-region: drag; /* Crucial for dragging the window */
+  user-select: none;
+  font-family: system-ui, -apple-system, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  border-bottom: 1px solid #222;
+}
+
+.titlebar-drag-region {
+  display: flex;
+  align-items: center;
+  padding-left: 14px;
+  font-weight: 500;
+  font-size: 13px;
+  opacity: 0.8;
+  height: 100%;
+}
+
+.titlebar-controls {
+  display: flex;
+  height: 100%;
+  -webkit-app-region: no-drag; /* We must disable drag over buttons so they are clickable */
+}
+
+.control-btn {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.control-btn span {
+  font-size: 14px;
+}
+
+.control-btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.control-btn.close:hover {
+  background-color: #e81123;
+  color: #fff;
+}

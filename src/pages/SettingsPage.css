@@ -1,0 +1,131 @@
+/* Rack-mount panel background */
+.settings-rack-panel {
+  background: linear-gradient(145deg, #181818, #111111);
+  border: 1px solid #0a0a0a;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/* Custom Range Slider: The Groove */
+.retro-fader {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  margin: 10px 0;
+}
+
+.retro-fader:focus {
+  outline: none;
+}
+
+.retro-fader::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #000000;
+  border-radius: 3px;
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 255, 255, 0.05); /* subtle bottom lip catchlight */
+}
+
+/* Custom Range Slider: The Physical Fader Cap */
+.retro-fader::-webkit-slider-thumb {
+  height: 20px;
+  width: 12px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #444, #222);
+  border: 1px solid #111;
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.8), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px; /* Centers the thumb on the track */
+  transition: transform 0.1s;
+}
+
+.retro-fader::-webkit-slider-thumb:active {
+  background: linear-gradient(to bottom, #555, #333);
+}
+
+/* Accent lines for specific groups (optional visual flair) */
+.lcd-readout {
+  font-family: 'Courier New', Courier, monospace;
+  background: #050505;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,1);
+  border: 1px solid #1a1a1a;
+}
+
+/* Toggle Switch styling */
+.retro-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.retro-toggle-wrapper input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.retro-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #0a0a0a;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+  border: 1px solid #222;
+  transition: .4s;
+}
+
+.retro-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background: linear-gradient(145deg, #555, #333);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  transition: .4s;
+}
+
+.retro-toggle-wrapper input:checked + .retro-toggle-slider {
+  background-color: #1a1a1a;
+}
+
+.retro-toggle-wrapper input:checked + .retro-toggle-slider:before {
+  transform: translateX(20px);
+  background: linear-gradient(145deg, #38bdf8, #0284c7); /* LED blue when on */
+}
+/* Hardware-style Action Buttons (Tape Stop, Stutter) */
+.retro-action-btn {
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  transition: all 0.05s ease !important;
+  user-select: none;
+}
+
+.retro-action-btn:active {
+  transform: translateY(3px) !important;
+}
+
+/* Hide scrollbar entirely for the immersive desktop experience */
+::-webkit-scrollbar {
+  display: none;
+}
+

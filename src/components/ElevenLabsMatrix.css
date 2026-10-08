@@ -1,0 +1,12 @@
+.el-matrix {
+  display: inline-block;
+  position: relative;
+}
+
+.matrix-pixel {
+  transition: opacity 300ms ease-out, transform 150ms ease-out;
+}
+
+.matrix-pixel-active {
+  filter: url(#matrix-glow);
+}

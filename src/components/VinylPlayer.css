@@ -1,0 +1,719 @@
+/* ── turntable ───────────────────────────────────────────────── */
+
+.vp-turntable {
+  position: relative;
+  width: 1048px;
+  height: 618px;
+  flex-shrink: 0;
+  background: var(--surface, #1b1b1b);
+  border-radius: 12px;
+  box-shadow:
+    2px 12px 50px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border, #383838);
+}
+
+/* corner screws */
+.vp-screw {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #555, #222);
+  border: 1px solid #444;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.6);
+  z-index: 3;
+}
+
+.vp-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 2px;
+  background: #333;
+  border-radius: 1px;
+  transform: translate(-50%, -50%) rotate(35deg);
+}
+
+.vp-screw--tl {
+  top: 18px;
+  left: 18px;
+}
+
+.vp-screw--tr {
+  top: 18px;
+  right: 18px;
+}
+
+.vp-screw--bl {
+  bottom: 18px;
+  left: 18px;
+}
+
+.vp-screw--br {
+  bottom: 18px;
+  right: 18px;
+}
+
+/* power indicator */
+.vp-power-dot {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #444;
+  z-index: 3;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.vp-power-dot--on {
+  background: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+}
+
+.vp-power-dot--off {
+  background: #333;
+  box-shadow: none;
+}
+
+
+
+.vp-platter {
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 572px;
+  height: 572px;
+  border-radius: 50%;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.8),
+    0 0 0 3px #1a1a1a,
+    0 0 0 5px #0e0e0e;
+}
+
+/* thin ring highlight around the platter (like the reference sketch) */
+.vp-platter::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+/* ── vinyl record ────────────────────────────────────────────── */
+
+.vp-vinyl-wrapper {
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
+
+.vp-vinyl {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.vp-vinyl-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* album label (center) */
+.vp-label {
+  width: 38%;
+  height: 38%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* spindle hole */
+.vp-spindle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #555, #222);
+  border: 1px solid #444;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* tonearm joint dots */
+.vp-tonearm-joint {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #555, #222);
+  border: 1px solid #444;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.vp-tonearm-joint--mid {
+  top: 130px;
+}
+
+.vp-tonearm-joint--end {
+  top: 250px;
+}
+
+/* ── tonearm matching sketch ────────────────────────────────────── */
+
+.vp-tonearm-pivot {
+  position: absolute;
+  top: 150px;
+  right: 375px;
+  width: 12px;
+  height: 12px;
+  transform: translate(50%, -50%);
+  z-index: 5;
+}
+
+/* Dark matte machined pivot base */
+.vp-pivot-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  /* Deep matte plastic/metal gradient */
+  background: linear-gradient(135deg, #1c1c1c 0%, #0d0d0d 100%);
+  border: 1px solid #050505;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+
+  /* Subtle top edge highlight, deep shadow on the console */
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.8),
+    0 0 2px rgba(0, 0, 0, 1);
+}
+
+.vp-tonearm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  transform-origin: center center;
+  z-index: 8;
+  /* Smooth easing for when the arm moves onto the record */
+}
+
+/* The main arm: 3D Tube effect */
+.vp-tonearm-wand {
+  position: absolute;
+  top: -5px;
+  left: 1px;
+  width: 10px;
+  height: 268px;
+
+  /* Cylindrical gradient to give it physical volume */
+  background: linear-gradient(90deg, #a3a3a3 0%, #ffffff 30%, #ffffff 70%, #8a8a8a 100%);
+  border-radius: 5px;
+
+  /* Casts a shadow down onto the record */
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.6), 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* The bent section of the arm */
+.vp-tonearm-bend {
+  position: absolute;
+  top: 257px;
+  left: 3px;
+  width: 10px;
+  height: 88px;
+
+  /* Matches the cylindrical gradient of the main wand */
+  background: linear-gradient(90deg, #a3a3a3 0%, #ffffff 30%, #ffffff 70%, #8a8a8a 100%);
+  border-radius: 5px;
+  transform-origin: top center;
+  transform: rotate(40deg);
+
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.6), 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark matte headshell holding the stylus */
+.vp-tonearm-head {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 30px;
+  height: 60px;
+
+  /* Matches the pivot ring material */
+  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+  border: 1px solid #000;
+  border-radius: 6px 6px 4px 4px;
+  /* Slightly tapered look at the bottom */
+
+  box-shadow:
+    inset 1px 1px 1px rgba(255, 255, 255, 0.05),
+    /* Edge catchlight */
+    4px 6px 12px rgba(0, 0, 0, 0.7);
+  /* Deep shadow hovering over the vinyl */
+}
+
+/* A tiny physical detail: The Stylus Cartridge */
+.vp-tonearm-head::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 16px;
+  background: #2a2a2a;
+  border-radius: 2px;
+  border: 1px solid #111;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+
+/* ── digital display panels (bottom right) ────────────────────── */
+
+.vp-digital-displays {
+  position: absolute;
+  bottom: 40px;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  z-index: 2;
+  transform: scale(0.9);
+  transform-origin: bottom right;
+}
+
+@media (max-width: 900px) {
+  .vp-digital-displays {
+    transform: scale(0.7);
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .vp-digital-displays {
+    transform: scale(0.55);
+    bottom: 15px;
+    right: 20px;
+  }
+}
+
+.vp-digital-panel {
+  height: 75px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Hide scrollbar but keep functionality for lyrics */
+.vp-lyrics-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.vp-lyrics-container::-webkit-scrollbar {
+  display: none;
+}
+
+.vp-digital-matrix {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: scale(1.2);
+}
+
+.vp-digital-wave {
+  width: 200px;
+  height: 100%;
+  position: relative;
+}
+
+.vp-digital-wave .el-live-waveform-wrapper {
+  background: transparent !important;
+  height: 100% !important;
+}
+
+/* Retro Hardware Button - Raised / Convex */
+.vp-retro-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  /* A subtle gradient makes the top of the button catch light 
+     and the bottom fade into shadow, giving it a 3D dome effect */
+  background: linear-gradient(145deg, #222222, #0d0d0d);
+  border: 1px solid #050505;
+  /* Dark base ring */
+
+  /* The Magic:
+    1. Outer dark shadow (bottom right) for physical elevation
+    2. Outer light highlight (top left) to catch ambient light
+    3. Faint inner rim highlight so the edge looks sharp
+  */
+  box-shadow:
+    3px 3px 5px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.06),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+
+  color: #777777;
+  /* Slightly brighter resting state */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.1s ease;
+}
+
+/* Make the SVG look painted on the raised surface */
+.vp-retro-btn svg {
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.8));
+}
+
+/* Hover state: Icon lights up */
+.vp-retro-btn:hover {
+  color: #bbbbbb;
+}
+
+/* Active state: Physically clicking the button down */
+.vp-retro-btn:active {
+  /* Flatten the gradient */
+  background: #111111;
+  /* Remove the drop shadow and add a harsh inset shadow to sink it */
+  box-shadow:
+    0px 0px 0px rgba(0, 0, 0, 0),
+    0px 0px 0px rgba(255, 255, 255, 0),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.9);
+  color: #444444;
+  transform: translateY(1px);
+  /* Physically move it down */
+}
+
+/* Retro Hardware Button - Rectangular / Convex */
+.vp-retro-btn-rect {
+  width: 38px;
+  /* Wide enough to look like a hardware switch */
+  height: 20px;
+  /* Slim height to fit under the album art */
+  border-radius: 3px;
+  /* Just a tiny rounding on the corners */
+
+  /* Same 3D dome gradient as the round buttons */
+  background: linear-gradient(145deg, #222222, #0d0d0d);
+  border: 1px solid #050505;
+
+  /* Physical elevation shadows */
+  box-shadow:
+    3px 3px 5px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.06),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+
+  color: #777777;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.1s ease;
+}
+
+/* Paint the SVG on the surface */
+.vp-retro-btn-rect svg {
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.8));
+}
+
+.vp-retro-btn-rect:hover {
+  color: #bbbbbb;
+}
+
+/* Clicking physically sinks the rectangle into the panel */
+.vp-retro-btn-rect:active {
+  background: #111111;
+  box-shadow:
+    0px 0px 0px rgba(0, 0, 0, 0),
+    0px 0px 0px rgba(255, 255, 255, 0),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.9);
+  color: #444444;
+  transform: translateY(1px);
+}
+
+/* ── sliders ──────────────────────────────────── */
+
+.vp-sliders-container {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px 25px;
+  width: 260px;
+  box-sizing: border-box;
+  height: auto;
+}
+
+.vp-slider-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.vp-slider-label {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.vp-slider-wrapper {
+  height: 140px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vp-slider-ticks {
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  left: -2px;
+  width: 4px;
+  background: repeating-linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.4) 0,
+      rgba(255, 255, 255, 0.4) 2px,
+      transparent 2px,
+      transparent calc(10% - 0.2px));
+  pointer-events: none;
+}
+
+.vp-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 170px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+  transform: rotate(-90deg);
+}
+
+.vp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.vp-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+.vp-scrolling-matrix .matrix-pixel {
+  transition: none !important;
+}
+
+/* ── horizontal fx sliders ──────────────────────────────────── */
+
+.vp-fx-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.vp-fx-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.vp-fx-label {
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  width: 25px;
+}
+
+.vp-slider-wrapper-hz {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.vp-slider-ticks-hz {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: -6px;
+  height: 4px;
+  background: repeating-linear-gradient(to right,
+      rgba(255, 255, 255, 0.4) 0,
+      rgba(255, 255, 255, 0.4) 2px,
+      transparent 2px,
+      transparent calc(10% - 0.2px));
+  pointer-events: none;
+}
+
+.vp-slider-hz {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+  outline: none;
+}
+
+.vp-slider-hz::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.vp-slider-hz::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* ── secondary album detail panel ───────────────────────────── */
+
+.vp-secondary-panel {
+  padding: 24px 20px;
+  width: 100%;
+  height: 470px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.vp-secondary-cover-wrap {
+  width: 165px;
+  height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #262626;
+  border-radius: 6px;
+  background: radial-gradient(circle at 30% 20%, #171717, #0d0d0d);
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.8),
+    0 0 12px rgba(255, 255, 255, 0.06);
+}
+
+.vp-secondary-meta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vp-secondary-row {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 22px;
+}
+
+.vp-secondary-label {
+  color: rgba(255, 255, 255, 0.42);
+  font-family: monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.vp-secondary-value {
+  color: rgba(255, 255, 255, 0.84);
+  font-family: 'Doto', monospace;
+  font-size: 0.83rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vp-secondary-value--main {
+  color: #ffffff;
+  font-weight: 700;
+}

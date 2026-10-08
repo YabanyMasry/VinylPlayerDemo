@@ -1,0 +1,164 @@
+/* ── play button ─────────────────────────────────────────────── */
+
+.el-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.el-play-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+
+.el-play-btn:active {
+  transform: scale(0.96);
+}
+
+.el-play-btn--playing {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── spinner ─────────────────────────────────────────────────── */
+
+.el-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: elSpin 0.6s linear infinite;
+}
+
+@keyframes elSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── progress slider ─────────────────────────────────────────── */
+
+.el-progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.7) var(--el-pct, 0%),
+    rgba(255, 255, 255, 0.12) var(--el-pct, 0%),
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  outline: none;
+  cursor: pointer;
+  transition: height 0.15s;
+}
+
+.el-progress:hover {
+  height: 6px;
+}
+
+.el-progress:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Thumb — WebKit */
+.el-progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: #fff;
+  transition: width 0.15s, height 0.15s;
+}
+
+.el-progress:hover::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+}
+
+/* Thumb — Firefox */
+.el-progress::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  transition: width 0.15s, height 0.15s;
+}
+
+.el-progress:hover::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+}
+
+/* ── time ────────────────────────────────────────────────────── */
+
+.el-time {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  user-select: none;
+  min-width: 40px;
+}
+
+/* ── speed control ───────────────────────────────────────────── */
+
+.el-speed-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.el-speed-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+  font-family: monospace;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.el-speed-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.el-speed-btn--active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── layout helpers (used on the test page) ──────────────────── */
+
+.el-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.el-row--wide {
+  width: 100%;
+}
+
+.el-flex-1 {
+  flex: 1;
+  min-width: 0;
+}

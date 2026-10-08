@@ -1,0 +1,17 @@
+.albums-page {
+  position: fixed;
+  inset: 0;
+  top: 0; /* Full screen */
+  padding: 24px 48px; /* Push content down to avoid PillNav overlap */
+  background: var(--bg);
+  z-index: 5;
+  overflow-y: auto;
+  border: none !important;
+  border-radius: 0 !important;
+  padding-top: 55px !important;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.albums-page::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
